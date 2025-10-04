@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expenza: Approval Rule Configuration Module</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Tailwind Configuration for the futuristic theme
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'space-dark': '#0D1117',
+                        'space-mid': '#161B22',
+                        'space-light': '#21262D',
+                        'neon-teal': '#00F0FF', // Primary Accent
+                        'neon-violet': '#7F00FF', // Secondary Accent
+                        // Custom colors from the diagram
+                        'responsible-leopard': '#a32b26',
+                        
+                        
+                        
+                      
+                        
+                        
+                        
+                        
+                    },
+                    keyframes: {
+                        'neon-pulse': {
+                            '0%, 100%': { boxShadow: '0 0 5px rgba(0, 240, 255, 0.4)' },
+                            '50%': { boxShadow: '0 0 15px rgba(0, 240, 255, 0.6)' },
+                        }
+                    },
+                    animation: {
+                        'neon-pulse': 'neon-pulse 2s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    </head>
+<body class="font-sans antialiased">
+
+    <header class="fixed top-0 left-0 right-0 p-4 bg-space-mid/90 backdrop-blur-sm border-b border-neon-teal/30">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+             <span class="text-xl font-extrabold tracking-tight text-white">Expenza<span class="text-neon-teal">.OS</span></span>
+             <span class="text-sm text-slate-500">Approvals / Miscellaneous Rule / *Configuration*</span>
+        </div>
+    </header>
+
+    <div class="mt-20 max-w-7xl w-full grid grid-cols-1 lg:grid-cols-5 gap-10 p-8 bg-space-mid rounded-2xl border border-neon-violet/30 shadow-2xl">
+
+        <div class="lg:col-span-2 space-y-8 p-4 border border-space-light rounded-lg">
+            <h1 class="text-2xl font-extrabold text-neon-teal border-b border-neon-teal/50 pb-3 flex items-center">
+                <i class="ph ph-sliders text-xl mr-2"></i> Rule Core Parameters
+            </h1>
+            
+            <div class="space-y-4">
+                <p class="text-lg font-semibold text-slate-300">Target & Initial Flow</p>
+                
+                <div>
+                    <label for="user-field" class="block text-sm font-medium text-slate-400 mb-1">User Origin</label>
+                    <input type="text" id="user-field" value="marc" readonly class="sketch-input w-full bg-space-dark/70 opacity-80 cursor-not-allowed" />
+                </div>
+
+                <div class="mt-4">
+                    <label for="manager-field" class="block text-sm font-medium text-slate-400 mb-1">Default Manager (sarah)</label>
+                    <div class="relative">
+                         <input type="text" id="manager-field" value="sarah" class="sketch-input w-full pr-10" />
+                         <i class="ph ph-caret-down text-slate-500 absolute right-3 top-1/2 transform -translate-y-1/2"></i>
+                    </div>
+                </div>
+
+                <div class="p-3 mt-4 text-xs text-neon-violet border-l-4 border-neon-violet bg-neon-violet/10 rounded-r-md">
+                    <i class="ph ph-info text-md mr-2"></i>
+                    <span class="font-medium">Dynamic Delegation:</span> Manager on user record is default, but Admin can override here for specific rules.
+                </div>
+            </div>
+
+            <hr class="border-space-light">
+
+            <div>
+                <label for="min-approval-percent" class="block text-lg font-semibold text-slate-300 mb-3">Minimum Approval Percentage</label>
+                <div class="flex items-center space-x-3">
+                    <input type="number" id="min-approval-percent" value="75" min="0" max="100" class="sketch-input w-24 text-center text-xl font-mono" />
+                    <span class="text-xl text-neon-teal font-bold">%</span>
+                    <span class="sketch-label bg-vital-goldfinch text-white">   </span>
+                    <p class="text-sm text-slate-500">(Required Votes / Total Votes)</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="lg:col-span-3 space-y-6 p-4">
+            <h2 class="text-2xl font-bold text-white mb-6 border-b border-space-light pb-3 flex items-center">
+                 <i class="ph ph-flow-arrow text-xl mr-2 text-neon-teal"></i> Approvers <span class="text-neon-teal ml-2">Workflow</span>
+            </h2>
+            
+            <div class="flex items-start space-x-4 p-4 rounded-lg bg-space-dark border border-responsible-leopard/50">
+                <div class="flex-shrink-0">
+                    <div id="manager-approver-box" class="checkbox-box checked" onclick="toggleCheckbox('manager-approver-box')">
+                        <i class="ph ph-check-fat text-lg text-responsible-leopard"></i>
+                    </div>
+                </div>
+                <div class="flex-grow space-y-1">
+                    <div class="flex items-center space-x-2">
+                        <span class="sketch-label bg-responsible-leopard text-white">Responsible Leopard</span>
+                        <p class="text-white">Designate Manager as Approver?</p>
+                        <span class="sketch-label bg-nisarg-patel text-white"></span>
+                    </div>
+                    <p class="text-xs text-slate-400 border-l border-nisarg-patel pl-2 pt-1">
+                        If enabled, the request first seeks approval from the User's *Default Manager* before proceeding to custom approver stages.
+                    </p>
+                </div>
+            </div>
+
+            <div class="space-y-4 pt-4">
+                <p class="text-lg font-semibold text-slate-300">Approver Chain</p>
+
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-3 bg-space-dark p-3 rounded-lg border border-space-light/50 shadow-md">
+                        <span class="text-neon-teal font-bold w-4">1</span>
+                        <div class="flex-1 flex items-center space-x-3">
+                            <span class="sketch-label bg-golden-dove"></span>
+                            <input type="text" value="John" class="sketch-input flex-1 max-w-[150px]" placeholder="User ID/Name" />
+                        </div>
+                        <i class="ph ph-arrow-circle-right text-lg text-slate-500"></i>
+
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-slate-400">Required:</span>
+                            <span class="sketch-label bg-cheery-sandpiper text-white"></span>
+                            <div id="check-1-req" class="checkbox-box" onclick="toggleCheckbox('check-1-req')">
+                                </div>
+                        </div>
+
+                        <i class="ph ph-arrow-circle-right text-lg text-slate-500"></i>
+
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-slate-400">Un-Approval Lock:</span>
+                            <span class="sketch-label bg-cheerful-sheep text-white"></span>
+                            <div id="check-1-lock" class="checkbox-box checked" onclick="toggleCheckbox('check-1-lock')">
+                                <i class="ph ph-check-fat text-lg text-neon-teal"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-3 bg-space-dark p-3 rounded-lg border border-space-light/50 shadow-md">
+                        <span class="text-neon-teal font-bold w-4">2</span>
+                        <div class="flex-1 flex items-center space-x-3">
+                            <input type="text" value="Mitch" class="sketch-input max-w-[150px]" placeholder="User ID/Name" />
+                            <span class="sketch-label bg-glorious-weasel"></span>
+                        </div>
+                        <i class="ph ph-arrow-circle-right text-lg text-slate-500"></i>
+
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-slate-400">Required:</span>
+                            <div id="check-2-req" class="checkbox-box checked" onclick="toggleCheckbox('check-2-req')">
+                                <i class="ph ph-check-fat text-lg text-neon-teal"></i>
+                            </div>
+                        </div>
+
+                        <i class="ph ph-arrow-circle-right text-lg text-slate-500"></i>
+
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-slate-400">Un-Approval Lock:</span>
+                            <div id="check-2-lock" class="checkbox-box" onclick="toggleCheckbox('check-2-lock')">
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-3 bg-space-dark p-3 rounded-lg border border-space-light/50 shadow-md">
+                        <span class="text-neon-teal font-bold w-4">3</span>
+                        <div class="flex-1 flex items-center space-x-3">
+                            <input type="text" value="Andreas" class="sketch-input max-w-[150px]" placeholder="User ID/Name" />
+                            <span class="sketch-label bg-strong-pony"></span>
+                        </div>
+                        <i class="ph ph-arrow-circle-right text-lg text-slate-500"></i>
+
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-slate-400">Required:</span>
+                            <div id="check-3-req" class="checkbox-box" onclick="toggleCheckbox('check-3-req')">
+                                </div>
+                        </div>
+
+                        <i class="ph ph-arrow-circle-right text-lg text-slate-500"></i>
+
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm text-slate-400">Un-Approval Lock:</span>
+                            <div id="check-3-lock" class="checkbox-box" onclick="toggleCheckbox('check-3-lock')">
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-space-light">
+
+            <div class="space-y-4">
+                <p class="text-lg font-semibold text-slate-300">Approval Execution Logic</p>
+                <div class="flex items-start space-x-4 p-4 rounded-lg bg-space-dark border border-assured-cod/50">
+                    <div class="flex-shrink-0 pt-1">
+                        <div id="sequence-check" class="checkbox-box checked" onclick="toggleCheckbox('sequence-check')">
+                            <i class="ph ph-check-fat text-lg text-assured-cod"></i>
+                        </div>
+                    </div>
+                    <div class="flex-grow space-y-2 text-sm">
+                        
+                        <p class="text-slate-300">
+                            If this field is ticked , the above *sequence of approvers matters*. The request proceeds to John 
+                             only after the previous approver approves.
+                        </p>
+                        <p class="text-sm text-red-400 font-medium">
+                            <i class="ph ph-warning-circle text-lg mr-1"></i>
+                            If ANY required approver rejects, the entire expense request is *auto-rejected*.
+                        </p>
+                        <p class="text-slate-300">
+                            If not ticked, the request is sent to all custom approvers simultaneously <span class="sketch-label bg-cheery-pigeon">Cheery Pigeon</span>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-neon-teal/50">
+
+            <div class="flex justify-end pt-4 space-x-4">
+                <button class="px-6 py-2 border border-slate-600 text-slate-300 rounded-lg hover:border-neon-violet hover:text-neon-violet transition duration-300 hover:shadow-neon-violet/50 hover:shadow-md">
+                    <i class="ph ph-x-circle mr-1"></i> Cancel Changes
+                </button>
+                <button class="px-6 py-2 bg-neon-teal text-space-dark font-bold rounded-lg shadow-lg shadow-neon-teal/50 hover:bg-white transition duration-300 hover:shadow-neon-teal">
+                    <i class="ph ph-floppy-disk mr-1"></i> Finalize Rule
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        /**
+         * Simple JavaScript to simulate checkbox state toggling
+         */
+        window.toggleCheckbox = (id) => {
+            const box = document.getElementById(id);
+            const icon = box.querySelector('i');
+            
+            // Toggle the 'checked' class
+            box.classList.toggle('checked');
+
+            // Find the correct icon based on the box's ID for better visual mapping (optional, but nice touch)
+            let checkIconClass = 'ph-check-fat';
+            let checkColorClass = 'text-neon-teal';
+
+            if (id === 'manager-approver-box') {
+                checkColorClass = 'text-responsible-leopard';
+            } else if (id === 'sequence-check') {
+                checkColorClass = 'text-assured-cod';
+            }
+            
+            // Update the icon content
+            if (box.classList.contains('checked')) {
+                // If checked, ensure the check icon is visible
+                if (!icon) {
+                     box.innerHTML = <i class="ph ${checkIconClass} text-lg ${checkColorClass}"></i>;
+                } else {
+                     icon.classList.remove('hidden');
+                     icon.classList.add(checkColorClass);
+                }
+            } else {
+                // If unchecked, hide the icon (or clear inner HTML)
+                if (icon) {
+                    icon.classList.add('hidden');
+                }
+            }
+        };
+
+        // Initialize the appearance of checked boxes on load
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.checkbox-box.checked').forEach(box => {
+                // Initial check is handled by the static HTML/CSS, this ensures consistency
+                const id = box.id;
+                let checkColorClass = 'text-neon-teal';
+                if (id === 'manager-approver-box') {
+                    checkColorClass = 'text-responsible-leopard';
+                } else if (id === 'sequence-check') {
+                    checkColorClass = 'text-assured-cod';
+                }
+                 box.querySelector('i').classList.add(checkColorClass);
+
+            });
+        });
+    </script>
+
+</body>
+</html> Approvers page
