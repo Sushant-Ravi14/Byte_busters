@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Submission Form | Expenza.OS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Expenga.OS Color Palette --- */
+        :root {
+            --primary-bg: #100d1e; 
+            --secondary-bg: #1c182c; 
+            --primary-text: #f0f0f0; 
+            --accent-purple: #6A5ACD; 
+            --accent-cyan: #00bcd4; 
+            --border-color: #332e4d; 
+            --neon-glow: rgba(106, 90, 205, 0.5); 
+            --neon-cyan-glow: rgba(0, 188, 212, 0.4);
+            --font-family-sans: 'Inter', sans-serif;
+        }
+
+        /* --- Global Reset and Base Style --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: all 0.2s ease-out;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--primary-text);
+            font-family: var(--font-family-sans);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        main {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+        }
+
+        /* ======================================= */
+        /* --- Header & Navigation (Logo Only) --- */
+        /* ======================================= */
+        .top-header {
+            display: flex;
+            justify-content: flex-start; /* Aligns logo to the left */
+            align-items: center;
+            padding: 15px 50px;
+            background-color: var(--primary-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        /* LOGO STYLES (MATCHING IMAGE) */
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5em;
+            font-weight: 800;
+            text-decoration: none;
+        }
+        .logo-text-expenza {
+            color: var(--accent-purple); 
+            margin-right: -4px; 
+            text-shadow: 0 0 5px rgba(106, 90, 205, 0.7);
+        }
+        .logo-text-os {
+            color: var(--accent-cyan); 
+            text-shadow: 0 0 5px rgba(0, 188, 212, 0.7);
+        }
+        
+
+        /* ======================================= */
+        /* --- Form Container Styles --- */
+        /* ======================================= */
+        .form-container {
+            max-width: 900px; 
+            margin: 50px auto;
+            background-color: var(--secondary-bg); 
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.6), 0 0 15px var(--neon-glow); 
+            animation: fadeIn 0.8s ease-out;
+            padding: 40px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Shared Input Styles */
+        input[type="text"], input[type="number"], select {
+            background: var(--primary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--primary-text);
+            padding: 12px;
+            font-size: 1em;
+            width: 100%;
+            font-family: var(--font-family-sans);
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+            outline: none;
+        }
+        input:focus, select:focus {
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 8px rgba(106, 90, 205, 0.8);
+        }
+        .field-group label {
+            display: block;
+            font-size: 0.8em;
+            margin-bottom: 8px;
+            color: var(--accent-cyan); 
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+        }
+        .submit-button {
+            font-family: var(--font-family-sans);
+            background-color: var(--accent-purple);
+            border: none;
+            color: var(--primary-text);
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 5px 20px var(--neon-glow);
+        }
+        .submit-button:hover {
+            filter: brightness(1.2);
+            transform: scale(1.02);
+        }
+
+        /* ======================================= */
+        /* --- Expense Form Specific Styles --- */
+        /* ======================================= */
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .attach-button {
+            font-size: 1em;
+            padding: 12px 25px;
+            background-color: var(--accent-purple);
+            border: none;
+            color: var(--primary-text);
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(106, 90, 205, 0.4);
+        }
+        .attach-button:hover {
+            filter: brightness(1.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--neon-glow);
+        }
+
+        .workflow-status {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+        .status-item { color: #b0b0b0; }
+        .status-item.active {
+            color: var(--accent-cyan);
+            font-weight: 700;
+            text-shadow: 0 0 5px var(--neon-cyan-glow);
+        }
+        .separator {
+            color: var(--border-color);
+            font-size: 1.2em;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px 50px;
+            margin-bottom: 40px;
+        }
+        
+        .input-with-select {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+            background: var(--primary-bg);
+        }
+        .input-with-select input { border: none; background: transparent; box-shadow: none; }
+        .input-with-select select { border: none; border-left: 1px solid var(--border-color); background: var(--secondary-bg); width: auto; }
+        
+        .annotation-text {
+            background: var(--primary-bg);
+            border: 2px dashed var(--accent-cyan); 
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            font-size: 0.9em;
+            color: #d0d0d0;
+            line-height: 1.5;
+            box-shadow: 0 0 10px rgba(0, 188, 212, 0.2);
+        }
+        .approval-mockup { border-top: 2px dashed var(--border-color); padding-top: 20px; margin-bottom: 30px; font-size: 0.9em; color: #999; }
+        .approval-line { display: flex; justify-content: space-between; }
+        .submit-button { font-size: 1.3em; padding: 15px 50px; }
+    </style>
+</head>
+<body>
+
+<header class="top-header">
+    <a href="employee1.html" class="logo">
+        <span class="logo-text-expenza">Expenza</span>
+        <span class="logo-text-os">.OS</span>
+    </a>
+    </header>
+
+<main>
+    <div class="form-container" id="expenseFormContainer">
+        <h2>New Expense Submission</h2>
+        <div class="form-header">
+            <button class="attach-button">Attach Receipt</button>
+            <div class="workflow-status">
+                <span class="status-item">Draft</span>
+                <span class="separator">→</span>
+                <span class="status-item active">Waiting approval</span>
+                <span class="separator">→</span>
+                <span class="status-item">Approved</span>
+            </div>
+        </div>
+        
+        <form id="expenseForm">
+            <div class="form-grid">
+                <div class="field-group">
+                    <label for="description">Description</label>
+                    <input type="text" id="description" name="description" placeholder="e.g., Client Dinner, Flight to NYC" required>
+                </div>
+                <div class="field-group">
+                    <label for="expenseDate">Expense Date</label>
+                    <input type="text" id="expenseDate" name="expenseDate" value="4th Oct, 2025" required>
+                </div>
+                <div class="field-group">
+                    <label for="category">Category</label>
+                    <input type="text" id="category" name="category" value="Food" required>
+                </div>
+                <div class="field-group">
+                    <label for="paidBy">Paid by:</label>
+                    <select id="paidBy" name="paidBy">
+                        <option value="Sarah">Sarah</option>
+                        <option value="Mitchell">Mitchell</option>
+                        <option value="John">John</option>
+                        <option value="Andreas">Andreas</option>
+                        <option value="Company">Company</option>
+                    </select>
+                </div>
+                <div class="field-group">
+                    <label for="totalAmount">Total amount in local currency</label>
+                    <div class="input-with-select">
+                        <input type="number" id="totalAmount" name="totalAmount" value="567" required>
+                        <select id="currencySelect" name="currencySelect">
+                            <option value="USD">$ USD</option>
+                            <option value="EUR">€ EUR</option>
+                            <option value="GBP">£ GBP</option>
+                            <option value="INR" selected>₹ INR</option>
+                            <option value="JPY">¥ JPY</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="field-group">
+                    <label for="remarks">Remarks</label>
+                    <input type="text" id="remarks" name="remarks" placeholder="Optional notes for the approver">
+                </div>
+            </div>
+            
+            <p class="annotation-text">
+                **Currency Conversion Note:** You can submit your expense in any currency. The system will automatically convert the amount to the company's base currency using real-time rates on the manager's approval dashboard.
+            </p>
+
+            <div class="approval-mockup">
+                <div class="approval-line">
+                    <span class="label">Last Status:</span>
+                    <span class="label" id="approval-status" style="color: #999;">Draft</span>
+                    <span class="label" id="approval-timestamp">Ready for Submission</span>
+                </div>
+            </div>
+
+            <div class="form-footer">
+                <button type="submit" class="submit-button">Submit Expense</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const expenseForm = document.getElementById('expenseForm');
+        
+        // --- Attach Receipt Logic ---
+        const attachButton = document.querySelector('.attach-button');
+        const fileInput = document.createElement('input'); 
+        fileInput.type = 'file';
+        fileInput.accept = 'image/*,application/pdf';
+        fileInput.style.display = 'none';
+        document.body.appendChild(fileInput); 
+        let isReceiptAttached = false;
+
+        if (attachButton && fileInput) {
+            attachButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                fileInput.click();
+            });
+
+            fileInput.addEventListener('change', () => {
+                if (fileInput.files.length > 0) {
+                    isReceiptAttached = true;
+                    const fileName = fileInput.files[0].name;
+                    attachButton.textContent = `Attached: ${fileName.length > 20 ? fileName.substring(0, 17) + '...' : fileName}`;
+                    attachButton.style.backgroundColor = '#4CAF50'; 
+                    attachButton.style.boxShadow = '0 0 10px rgba(76, 175, 80, 0.6)';
+                } else {
+                    isReceiptAttached = false;
+                    attachButton.textContent = 'Attach Receipt';
+                    attachButton.style.backgroundColor = 'var(--accent-purple)';
+                    attachButton.style.boxShadow = '0 0 10px var(--neon-glow)';
+                }
+            });
+        }
+
+        // --- Expense Form Submission Logic ---
+        expenseForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Gather form data
+            const description = document.getElementById('description').value;
+            const expenseDate = document.getElementById('expenseDate').value;
+            const category = document.getElementById('category').value;
+            const totalAmount = document.getElementById('totalAmount').value;
+            const paidBy = document.getElementById('paidBy').value;
+            const remarks = document.getElementById('remarks').value;
+            const currencySelect = document.getElementById('currencySelect');
+            const currencySymbol = currencySelect.options[currencySelect.selectedIndex].text.split(' ')[0]; 
+
+            // 1. Visual Feedback Update
+            const now = new Date();
+            const time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+            document.getElementById('approval-status').textContent = 'Submitted';
+            document.getElementById('approval-status').style.color = 'var(--accent-cyan)';
+            document.getElementById('approval-timestamp').textContent = `Submitted by ${paidBy} at ${time}`;
+
+            const activeStatus = document.querySelector('.workflow-status .active');
+            if (activeStatus) {
+                activeStatus.textContent = 'Submitted';
+                activeStatus.style.color = 'var(--accent-cyan)';
+            }
+            
+            // 2. Prepare for redirection (simulated data pass)
+            const params = new URLSearchParams();
+            params.append('submitted', 'true');
+            params.append('employee', 'Sarah'); 
+            params.append('description', description);
+            params.append('expenseDate', expenseDate);
+            params.append('category', category);
+            params.append('paidBy', paidBy); 
+            params.append('remarks', remarks);
+            params.append('totalAmount', totalAmount);
+            params.append('currency', currencySymbol); 
+            params.append('receiptAttached', isReceiptAttached ? 'true' : 'false');
+
+            // Redirect back to the list page with the new data
+            setTimeout(() => {
+                // Assuming employee1.html is the list/dashboard page
+                window.location.href = `employee1.html?${params.toString()}`;
+            }, 800); 
+        });
+    });
+</script>
+</body>
+</html>
