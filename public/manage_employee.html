@@ -43,7 +43,69 @@
             }
         }
     </script>
-    </head>
+    <style>
+        /* Base styles matching the dark aesthetic */
+        body {
+            background-color: #0D1117; /* space-dark */
+            color: #E2E8F0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+        }
+
+        /* --- Custom UI Component Styles --- */
+
+        /* Custom label/tag styles from the sketch */
+        .sketch-label {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.5rem;
+            font-size: 0.75rem; /* Slightly smaller for density */
+            font-weight: 700;
+            color: #0D1117; /* Text is dark on the bright color */
+            text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Input and Text Field Style */
+        .sketch-input {
+            background-color: #0D1117;
+            border: 1px solid #21262D;
+            color: #fff;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+        }
+        .sketch-input:focus {
+            outline: none;
+            border-color: #00F0FF;
+            box-shadow: 0 0 0 2px rgba(0, 240, 255, 0.2);
+        }
+
+        /* Custom Checkbox Style (The small boxes in the diagram) */
+        .checkbox-box {
+            height: 1.8rem;
+            width: 1.8rem;
+            border: 2px solid #21262D;
+            background-color: #0D1117;
+            border-radius: 0.375rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .checkbox-box:hover {
+            border-color: #00F0FF;
+            box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+        }
+        .checkbox-box.checked {
+            border-color: #00F0FF;
+            background-color: #00F0FF20; /* Subtle background fill when checked */
+        }
+    </style>
+</head>
 <body class="font-sans antialiased">
 
     <header class="fixed top-0 left-0 right-0 p-4 bg-space-mid/90 backdrop-blur-sm border-b border-neon-teal/30">
@@ -295,4 +357,4 @@
     </script>
 
 </body>
-</html> Approvers page
+</html>
