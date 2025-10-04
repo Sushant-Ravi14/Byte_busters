@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expenza: Admin Console</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="admin_profile.css">
+    
+</head>
+<body class="font-sans antialiased flex h-screen text-slate-200">
+
+    <aside class="sidebar w-64 p-6 flex flex-col justify-between hidden md:flex">
+        <div>
+            <div class="flex items-center space-x-2 text-neon-teal mb-8">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 12L7 9L11 13L16 8L20 12" stroke="#00F0FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M16 8H13.5C12.6716 8 12 8.67157 12 9.5V11M8 17C8 16.1716 8.67157 15.5 9.5 15.5H12M14 4H10C7.79086 4 6 5.79086 6 8V16C6 18.2091 7.79086 20 10 20H14C16.2091 20 18 18.2091 18 16V8C18 5.79086 16.2091 4 14 4Z" stroke="#7F00FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="text-2xl font-extrabold tracking-tight">Expenza<span class="text-neon-violet">.OS</span></span>
+            </div>
+
+            <nav class="space-y-2">
+                <a href="./admin_console.html" class="group flex items-center p-3 rounded-lg hover:bg-space-dark transition duration-200">
+                    <i class="ph ph-desktop-tower text-xl text-neon-teal mr-3 group-hover:animate-pulse"></i>
+                    <span class="text-sm font-medium">Admin Console</span>
+                </a>
+                
+                <a href="./manage_employee.html" class="group flex items-center p-3 rounded-lg hover:bg-space-dark transition duration-200">
+                    <i class="ph ph-users-three text-xl text-neon-teal mr-3 group-hover:animate-pulse"></i>
+                    <span class="text-sm font-medium">Manage Employees</span>
+                    
+                </a>
+            </nav>
+        </div>
+
+        <a href="./index.html" class="group flex items-center p-3 rounded-lg hover:bg-space-dark transition duration-200">
+            <i class="ph ph-sign-out text-xl text-slate-400 mr-3 group-hover:text-red-500"></i>
+            <span class="text-sm font-medium text-slate-400 group-hover:text-red-500">Logout</span>
+        </a>
+    </aside>
+
+    <main class="flex-1 overflow-y-auto p-8 lg:p-12">
+        <section id="profile-view" class="max-w-4xl mx-auto animate-fade-in">
+            <div class="flex items-center justify-between mb-8">
+                <h1 class="text-3xl lg:text-4xl font-extrabold tracking-tight text-white section-title">Admin Profile</h1>
+                <button id="edit-profile-btn" class="flex items-center px-4 py-2 rounded-full border border-neon-teal text-neon-teal text-sm hover:bg-neon-teal hover:text-space-dark transition duration-300">
+                    <i class="ph ph-pencil-simple text-sm mr-2"></i>
+                    Edit Profile
+                </button>
+            </div>
+
+            <div class="profile-card bg-space-mid p-8 rounded-xl shadow-2xl flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8 transition-transform duration-300 hover:scale-[1.01]">
+                <div class="relative w-32 h-32 md:w-40 md:h-40 flex-shrink-0">
+                    <img src="https://i.ibb.co/L5hY5rL/avatar.png" alt="Admin Avatar" class="rounded-full w-full h-full object-cover border-4 border-neon-teal shadow-lg">
+                    <span class="absolute bottom-2 right-2 w-4 h-4 bg-green-500 rounded-full border-2 border-space-mid"></span>
+                </div>
+
+                <div class="text-center md:text-left flex-1">
+                    <h2 id="profile-name" class="text-2xl sm:text-3xl font-bold text-white mb-1">Jane Doe</h2>
+                    <p id="profile-role" class="text-neon-violet font-medium mb-4">Primary Admin</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-sm mt-6">
+                        <div class="flex items-center text-slate-400">
+                            <i class="ph ph-at text-neon-teal text-lg mr-2"></i>
+                            <span id="profile-email">jane.doe@example.com</span>
+                        </div>
+                        <div class="flex items-center text-slate-400">
+                            <i class="ph ph-identification-card text-neon-teal text-lg mr-2"></i>
+                            <span id="profile-id">ID: EXP-ADM-7890</span>
+                        </div>
+                        <div class="flex items-center text-slate-400">
+                            <i class="ph ph-building-office text-neon-teal text-lg mr-2"></i>
+                            <span id="profile-company">Expenza Corp.</span>
+                        </div>
+                        <div class="flex items-center text-slate-400">
+                            <i class="ph ph-currency-dollar text-neon-teal text-lg mr-2"></i>
+                            <span id="profile-currency">USD</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 space-y-6">
+                <div class="flex items-center justify-between p-6 rounded-xl bg-space-mid border border-space-light hover:border-neon-teal transition duration-300 cursor-pointer">
+                    <div class="flex items-center">
+                        <i class="ph ph-shield-check text-2xl text-neon-teal mr-4"></i>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Security Settings</h4>
+                            <p class="text-slate-400 text-sm">Update password, enable 2FA, and review recent activity.</p>
+                        </div>
+                    </div>
+                    <i class="ph ph-caret-right text-lg text-neon-teal"></i>
+                </div>
+                <div class="flex items-center justify-between p-6 rounded-xl bg-space-mid border border-space-light hover:border-neon-teal transition duration-300 cursor-pointer">
+                    <div class="flex items-center">
+                        <i class="ph ph-bell text-2xl text-neon-teal mr-4"></i>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Notification Preferences</h4>
+                            <p class="text-slate-400 text-sm">Control how you receive system alerts and updates.</p>
+                        </div>
+                    </div>
+                    <i class="ph ph-caret-right text-lg text-neon-teal"></i>
+                </div>
+                <div class="flex items-center justify-between p-6 rounded-xl bg-space-mid border border-space-light hover:border-neon-teal transition duration-300 cursor-pointer">
+                    <div class="flex items-center">
+                        <i class="ph ph-cloud-arrow-down text-2xl text-neon-teal mr-4"></i>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Export Data</h4>
+                            <p class="text-slate-400 text-sm">Download your company's financial data in various formats.</p>
+                        </div>
+                    </div>
+                    <i class="ph ph-caret-right text-lg text-neon-teal"></i>
+                </div>
+            </div>
+        </section>
+
+        <section id="profile-edit" class="max-w-4xl mx-auto hidden animate-fade-in">
+            <div class="flex items-center justify-between mb-8">
+                <h1 class="text-3xl lg:text-4xl font-extrabold tracking-tight text-white section-title">Edit Profile</h1>
+                <button id="cancel-edit-btn" class="flex items-center px-4 py-2 rounded-full border border-slate-400 text-slate-400 text-sm hover:bg-slate-400 hover:text-space-dark transition duration-300">
+                    <i class="ph ph-x text-sm mr-2"></i>
+                    Cancel
+                </button>
+            </div>
+
+            <div class="profile-card bg-space-mid p-8 rounded-xl shadow-2xl">
+                <form id="edit-profile-form">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="edit-name" class="block text-sm font-medium text-slate-300 mb-2">Full Name</label>
+                            <input type="text" id="edit-name" class="w-full p-3 rounded-lg bg-space-dark border border-space-light text-white focus:border-neon-teal focus:ring focus:ring-neon-teal/30" required>
+                        </div>
+                        <div>
+                            <label for="edit-email" class="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
+                            <input type="email" id="edit-email" class="w-full p-3 rounded-lg bg-space-dark border border-space-light text-white focus:border-neon-teal focus:ring focus:ring-neon-teal/30" required>
+                        </div>
+                        <div>
+                            <label for="edit-role" class="block text-sm font-medium text-slate-300 mb-2">Role</label>
+                            <input type="text" id="edit-role" class="w-full p-3 rounded-lg bg-space-dark border border-space-light text-white focus:border-neon-teal focus:ring focus:ring-neon-teal/30">
+                        </div>
+                        <div>
+                            <label for="edit-currency" class="block text-sm font-medium text-slate-300 mb-2">Preferred Currency</label>
+                            <input type="text" id="edit-currency" class="w-full p-3 rounded-lg bg-space-dark border border-space-light text-white focus:border-neon-teal focus:ring focus:ring-neon-teal/30">
+                        </div>
+                    </div>
+                    <div class="mt-8 text-center">
+                        <button type="submit" class="bg-neon-teal text-space-dark font-bold text-lg px-8 py-3 rounded-full shadow-lg shadow-neon-teal/50 hover:bg-white transition transform hover:scale-105 duration-300">
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    <script src="./admin_profile.js"></script>
+</body>
+</html>
