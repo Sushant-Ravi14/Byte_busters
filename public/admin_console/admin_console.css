@@ -1,0 +1,11 @@
+body {
+    background-color: #0D1117; /* space-dark */
+    color: #E2E8F0;
+}
+.admin-card {
+    background-color: #161B22; /* space-mid */
+    border: 1px solid #21262D; /* space-light */
+}
+.header-bg {
+    background-image: linear-gradient(to top, #0D1117, #161B22);
+}
